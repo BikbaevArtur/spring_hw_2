@@ -1,7 +1,7 @@
 package ru.gb.my_first_crud.repository;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -45,4 +45,21 @@ public class UserRepository {
         String sql = "DELETE FROM userTable WHERE id = ?";
         jdbc.update(sql,id);
     }
+
+    public User getOne(int id){
+        String sql = "SELECT id, firstName, lastName FROM usertable WHERE id = ?";
+        return jdbc.queryForObject(sql,new Object[]{id},new BeanPropertyRowMapper<>(User.class));
+        //
+    }
+
+    public  void updateUser(User user){
+        String sql = "UPDATE usertable SET  firstName =?,lastname =? WHERE id = ?";
+        jdbc.update(sql,user.getFirstName(),user.getLastName(),user.getId());
+    }
+
+
+
+
+
+
 }

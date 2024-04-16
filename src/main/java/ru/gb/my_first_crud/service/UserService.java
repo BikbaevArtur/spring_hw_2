@@ -24,6 +24,15 @@ public class UserService {
 
     public void deleteById(int id){userRepository.deleteById(id); }
 
+    public  User getOne(int id){
+        return userRepository.getOne(id);
+    }
+
+    public User update(User user){
+        userRepository.updateUser(user);
+        return user;
+    }
+
 
 
 
